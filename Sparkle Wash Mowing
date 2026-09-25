@@ -1,0 +1,3614 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sparkle Wash | Mobile Car Washing & Sparkle Mowing</title>
+
+  <meta
+    name="description"
+    content="Sparkle Wash provides professional mobile car washing in Thame, Oxfordshire. Sparkle Mowing also provides mobile lawn mowing and garden services."
+  >
+
+  <meta
+    name="keywords"
+    content="Sparkle Wash, mobile car wash Thame, car washing Thame, Sparkle Mowing, lawn mowing Thame, grass edging Thame, garden tidy up Thame"
+  >
+
+  <meta name="author" content="Sparkle Wash">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sparkle Wash | Mobile Services in Thame">
+  <meta
+    property="og:description"
+    content="Professional mobile car washing and Sparkle Mowing services in Thame, Oxfordshire."
+  >
+  <meta property="og:site_name" content="Sparkle Wash">
+
+  <meta name="theme-color" content="#087cf7">
+
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      color: #10213b;
+      background: #f5faff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      background: #ffd51f;
+      color: #071b38;
+    }
+
+    :root {
+      --blue: #087cf7;
+      --blue-dark: #0455b7;
+      --blue-deep: #031b42;
+      --blue-soft: #eaf5ff;
+      --yellow: #ffd51f;
+
+      --green: #3f9b4d;
+      --green-dark: #26743a;
+      --green-deep: #173c22;
+      --green-soft: #eef9ef;
+
+      --white: #ffffff;
+      --text: #10213b;
+      --muted: #64748b;
+
+      --glass: rgba(255,255,255,.66);
+      --glass-border: rgba(255,255,255,.75);
+
+      --shadow:
+        0 20px 60px rgba(4,60,125,.12);
+
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+
+      --transition: .35s cubic-bezier(.2,.8,.2,1);
+    }
+
+    /* =========================================================
+       LOADER
+    ========================================================= */
+
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 30%, #168eff 0%, #0564d2 35%, #031b42 100%);
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-inner {
+      text-align: center;
+      color: white;
+    }
+
+    .loader-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.2);
+      animation: loaderPulse 1.5s infinite ease-in-out;
+    }
+
+    .loader-logo span {
+      font-size: 38px;
+    }
+
+    .loader-name {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .loader-line {
+      width: 130px;
+      height: 4px;
+      margin: 20px auto 0;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+    }
+
+    .loader-line::after {
+      content: "";
+      display: block;
+      width: 45%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--yellow);
+      animation: loading 1.1s infinite ease-in-out;
+    }
+
+    @keyframes loading {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(330%); }
+    }
+
+    @keyframes loaderPulse {
+      50% {
+        transform: scale(1.08) rotate(2deg);
+      }
+    }
+
+    /* =========================================================
+       SCROLL PROGRESS
+    ========================================================= */
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      z-index: 10001;
+      background: linear-gradient(90deg,var(--yellow),#fff07a,var(--yellow));
+      box-shadow: 0 0 15px rgba(255,213,31,.7);
+    }
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 0;
+      transition:
+        background var(--transition),
+        box-shadow var(--transition),
+        padding var(--transition);
+    }
+
+    .navbar.scrolled {
+      padding: 11px 0;
+      background: rgba(255,255,255,.84);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 10px 35px rgba(3,27,66,.1);
+    }
+
+    .nav-container {
+      width: min(1180px,calc(100% - 40px));
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 900;
+      letter-spacing: -.7px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg,var(--blue),#4db5ff);
+      color: white;
+      box-shadow: 0 8px 25px rgba(8,124,247,.28);
+      font-size: 21px;
+    }
+
+    .brand-text {
+      color: var(--blue-deep);
+      font-size: 19px;
+    }
+
+    .brand-text span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 10px 15px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .nav-cta {
+      background: var(--blue) !important;
+      color: white !important;
+      box-shadow: 0 8px 22px rgba(8,124,247,.25);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: var(--blue-dark) !important;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+      cursor: pointer;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 22px;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      background:
+        radial-gradient(circle at 75% 25%,rgba(70,180,255,.5),transparent 30%),
+        radial-gradient(circle at 15% 80%,rgba(255,213,31,.14),transparent 27%),
+        linear-gradient(135deg,#031b42 0%,#0455b7 48%,#087cf7 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(3,27,66,.85),
+          rgba(3,27,66,.48) 50%,
+          rgba(3,27,66,.08)
+        );
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 5;
+      width: min(1180px,calc(100% - 40px));
+      margin: auto;
+      padding: 130px 0 100px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: #fff7b2;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(12px);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 14px var(--yellow);
+    }
+
+    .hero h1 {
+      max-width: 700px;
+      font-size: clamp(46px,6vw,78px);
+      line-height: .98;
+      letter-spacing: -4px;
+      font-weight: 950;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--yellow);
+    }
+
+    .hero-subtitle {
+      max-width: 560px;
+      margin-bottom: 34px;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(17px,2vw,20px);
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 54px;
+      padding: 0 23px;
+      border-radius: 15px;
+      font-size: 14px;
+      font-weight: 850;
+      cursor: pointer;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-110%);
+      background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+      );
+      transition: transform .6s ease;
+    }
+
+    .btn:hover::after {
+      transform: translateX(110%);
+    }
+
+    .btn-primary {
+      color: #071b38;
+      background: var(--yellow);
+      box-shadow: 0 12px 30px rgba(255,213,31,.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      background: #ffe45b;
+      box-shadow: 0 18px 35px rgba(255,213,31,.32);
+    }
+
+    .btn-secondary {
+      color: white;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.16);
+    }
+
+    /* =========================================================
+       HERO CAR
+    ========================================================= */
+
+    .car-scene {
+      position: relative;
+      min-height: 470px;
+      display: grid;
+      place-items: center;
+    }
+
+    .car-glow {
+      position: absolute;
+      width: 430px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(84,193,255,.25);
+      filter: blur(35px);
+      animation: glowPulse 4s infinite ease-in-out;
+    }
+
+    @keyframes glowPulse {
+      50% {
+        transform: scale(1.12);
+        opacity: .7;
+      }
+    }
+
+    .car-card {
+      position: relative;
+      width: min(510px,100%);
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,.23);
+      border-radius: 34px;
+      background: rgba(255,255,255,.09);
+      box-shadow: 0 35px 90px rgba(0,0,0,.2);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transform: rotate(2deg);
+      animation: carFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes carFloat {
+      0%,100% {
+        transform: translateY(0) rotate(2deg);
+      }
+
+      50% {
+        transform: translateY(-13px) rotate(1deg);
+      }
+    }
+
+    .car-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,.7);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .9px;
+      text-transform: uppercase;
+    }
+
+    .sparkle {
+      color: var(--yellow);
+      font-size: 20px;
+    }
+
+    .car-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 20px 20px rgba(0,0,0,.18));
+    }
+
+    .car-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      padding: 13px 15px;
+      border-radius: 15px;
+      color: white;
+      background: rgba(0,0,0,.13);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .car-badge-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      color: #071b38;
+    }
+
+    .car-badge strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .car-badge small {
+      color: rgba(255,255,255,.62);
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       BUBBLES
+    ========================================================= */
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.07);
+      box-shadow:
+        inset 4px 4px 10px rgba(255,255,255,.13),
+        0 5px 20px rgba(255,255,255,.05);
+      animation: bubbleRise var(--duration) linear infinite;
+      animation-delay: var(--delay);
+      pointer-events: none;
+    }
+
+    @keyframes bubbleRise {
+      0% {
+        transform: translate3d(0,0,0) scale(.7);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: .8;
+      }
+
+      50% {
+        transform: translate3d(35px,-50vh,0) scale(1);
+      }
+
+      100% {
+        transform: translate3d(-25px,-115vh,0) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    /* =========================================================
+       WAVE
+    ========================================================= */
+
+    .wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 110px;
+      overflow: hidden;
+      line-height: 0;
+      z-index: 7;
+    }
+
+    .wave svg {
+      width: calc(100% + 1.3px);
+      height: 100%;
+      display: block;
+    }
+
+    /* =========================================================
+       GENERAL SECTIONS
+    ========================================================= */
+
+    section {
+      position: relative;
+      padding: 110px 0;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1120px,calc(100% - 40px));
+      margin: auto;
+    }
+
+    .section-heading {
+      max-width: 680px;
+      margin: 0 auto 55px;
+      text-align: center;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 13px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 15px;
+      color: var(--blue-deep);
+      font-size: clamp(32px,5vw,51px);
+      line-height: 1.05;
+      letter-spacing: -2.5px;
+      font-weight: 950;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* =========================================================
+       ABOUT — ORIGINAL SPARKLE WASH
+    ========================================================= */
+
+    .about {
+      background: #f7fbff;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .about-visual {
+      position: relative;
+      min-height: 420px;
+      display: grid;
+      place-items: center;
+    }
+
+    .about-orb {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#dff3ff,#b7e1ff);
+    }
+
+    .about-card {
+      position: relative;
+      width: min(350px,90%);
+      padding: 32px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.95);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      transform: rotate(-4deg);
+      transition: var(--transition);
+    }
+
+    .about-card:hover {
+      transform: rotate(0) translateY(-8px);
+    }
+
+    .about-icon {
+      width: 70px;
+      height: 70px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 25px;
+      border-radius: 20px;
+      background: linear-gradient(135deg,var(--blue),#58bdff);
+      color: white;
+      font-size: 32px;
+      box-shadow: 0 15px 30px rgba(8,124,247,.23);
+    }
+
+    .about-card h3 {
+      margin-bottom: 9px;
+      color: var(--blue-deep);
+      font-size: 23px;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .about-content h3 {
+      margin-bottom: 18px;
+      color: var(--blue-deep);
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
+
+    .about-content > p {
+      margin-bottom: 25px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .about-points {
+      display: grid;
+      gap: 13px;
+      list-style: none;
+    }
+
+    .about-points li {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .check {
+      width: 27px;
+      height: 27px;
+      flex: 0 0 27px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e7f4ff;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       PRICES — ORIGINAL SPARKLE WASH
+    ========================================================= */
+
+    .prices {
+      background:
+        radial-gradient(circle at 15% 20%,rgba(8,124,247,.08),transparent 25%),
+        #eef8ff;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,360px));
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .price-card {
+      position: relative;
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(255,255,255,.9);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .price-card::before {
+      content: "";
+      position: absolute;
+      top: -90px;
+      right: -90px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: rgba(8,124,247,.08);
+    }
+
+    .price-card.featured {
+      color: white;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(8,124,247,.96),
+          rgba(4,85,183,.96)
+        );
+      box-shadow: 0 30px 70px rgba(8,124,247,.23);
+      transform: translateY(-10px);
+    }
+
+    .price-card.featured::before {
+      background: rgba(255,213,31,.15);
+    }
+
+    .price-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 70px rgba(4,60,125,.17);
+    }
+
+    .price-card.featured:hover {
+      transform: translateY(-18px);
+    }
+
+    .price-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 16px;
+      background: #e9f5ff;
+      font-size: 26px;
+    }
+
+    .featured .price-icon {
+      background: rgba(255,255,255,.14);
+    }
+
+    .price-card h3 {
+      margin-bottom: 4px;
+      color: var(--blue-deep);
+      font-size: 25px;
+    }
+
+    .featured h3 {
+      color: white;
+    }
+
+    .price-card p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .featured p {
+      color: rgba(255,255,255,.68);
+    }
+
+    .price {
+      margin: 27px 0;
+      color: var(--blue);
+      font-size: 54px;
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: -3px;
+    }
+
+    .featured .price {
+      color: var(--yellow);
+    }
+
+    .price small {
+      font-size: 16px;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    .price-card .btn {
+      width: 100%;
+    }
+
+    /* =========================================================
+       WHY US — ORIGINAL SPARKLE WASH
+    ========================================================= */
+
+    .why {
+      background: white;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 28px 23px;
+      border-radius: 23px;
+      background: linear-gradient(145deg,#fff,#f5faff);
+      border: 1px solid #e7f1fb;
+      box-shadow: 0 14px 40px rgba(4,60,125,.07);
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-9px);
+      border-color: rgba(8,124,247,.2);
+      box-shadow: 0 24px 50px rgba(4,60,125,.12);
+    }
+
+    .feature-icon {
+      width: 57px;
+      height: 57px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 17px;
+      background: #eaf5ff;
+      font-size: 27px;
+      transition: var(--transition);
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.08) rotate(-4deg);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 8px;
+      color: var(--blue-deep);
+      font-size: 17px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       CTA — ORIGINAL SPARKLE WASH
+    ========================================================= */
+
+    .cta {
+      padding: 100px 0;
+      color: white;
+      background:
+        radial-gradient(circle at 80% 10%,rgba(255,213,31,.16),transparent 25%),
+        linear-gradient(135deg,#031b42,#0568d7);
+    }
+
+    .cta-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      padding: 55px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 35px;
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 35px 80px rgba(0,0,0,.15);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .cta-inner::after {
+      content: "";
+      position: absolute;
+      right: -100px;
+      bottom: -140px;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      background: rgba(255,213,31,.1);
+    }
+
+    .cta h2 {
+      margin-bottom: 10px;
+      font-size: clamp(30px,4vw,45px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .cta p {
+      max-width: 600px;
+      color: rgba(255,255,255,.7);
+    }
+
+    .cta-buttons {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* =========================================================
+       CONTACT — ORIGINAL SPARKLE WASH
+    ========================================================= */
+
+    .contact {
+      background: #f7fbff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .contact-info {
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      color: white;
+      background: linear-gradient(145deg,#087cf7,#0455b7);
+      box-shadow: 0 25px 60px rgba(8,124,247,.2);
+      overflow: hidden;
+    }
+
+    .contact-info h3 {
+      margin-bottom: 12px;
+      font-size: 30px;
+      letter-spacing: -1px;
+    }
+
+    .contact-info > p {
+      margin-bottom: 32px;
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 15px;
+      list-style: none;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .contact-icon {
+      width: 43px;
+      height: 43px;
+      flex: 0 0 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .contact-list small {
+      display: block;
+      margin-bottom: 2px;
+      color: rgba(255,255,255,.55);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      font-weight: 800;
+    }
+
+    .contact-list strong {
+      font-size: 14px;
+    }
+
+    .contact-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-actions .btn-primary {
+      color: #071b38;
+    }
+
+    .contact-actions .btn-secondary {
+      border-color: rgba(255,255,255,.22);
+    }
+
+    .contact-map {
+      position: relative;
+      min-height: 400px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88)),
+        repeating-linear-gradient(
+          45deg,
+          #d8ecfa 0,
+          #d8ecfa 1px,
+          transparent 1px,
+          transparent 20px
+        );
+      border: 1px solid white;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .map-circle {
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      border: 1px solid rgba(8,124,247,.15);
+    }
+
+    .map-circle::before,
+    .map-circle::after {
+      content: "";
+      position: absolute;
+      inset: 45px;
+      border: 1px solid rgba(8,124,247,.11);
+      border-radius: 50%;
+    }
+
+    .map-circle::after {
+      inset: 90px;
+    }
+
+    .location-pin {
+      position: relative;
+      z-index: 2;
+      width: 100px;
+      height: 100px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(8,124,247,.08);
+    }
+
+    .location-pin::before {
+      content: "";
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: rgba(8,124,247,.14);
+      animation: ripple 2.3s infinite ease-out;
+    }
+
+    .pin-icon {
+      position: relative;
+      z-index: 2;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 12px 30px rgba(8,124,247,.25);
+      font-size: 23px;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: scale(.5);
+        opacity: .8;
+      }
+
+      100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+
+    .map-label {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      padding: 11px 17px;
+      border-radius: 999px;
+      color: var(--blue-deep);
+      background: rgba(255,255,255,.85);
+      border: 1px solid white;
+      box-shadow: 0 10px 30px rgba(4,60,125,.1);
+      font-size: 12px;
+      font-weight: 800;
+      backdrop-filter: blur(12px);
+    }
+
+    /* =========================================================
+       🌱 SPARKLE MOWING
+       NEW SECTION ONLY
+    ========================================================= */
+
+    .mowing {
+      position: relative;
+      padding: 120px 0 130px;
+      overflow: hidden;
+      color: #173c22;
+      background:
+        linear-gradient(
+          180deg,
+          #eef8ff 0%,
+          #f4fbf2 12%,
+          #eef9ed 100%
+        );
+    }
+
+    /*
+      Subtle blue → green transition.
+      This belongs ONLY to the mowing section.
+    */
+
+    .mowing-transition {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(8,124,247,.13),
+          rgba(83,171,82,.08),
+          transparent
+        );
+    }
+
+    .mowing::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .45;
+      background:
+        radial-gradient(circle at 10% 30%,rgba(65,145,70,.2) 0 2px,transparent 3px),
+        radial-gradient(circle at 80% 25%,rgba(65,145,70,.14) 0 2px,transparent 3px),
+        radial-gradient(circle at 55% 75%,rgba(65,145,70,.12) 0 2px,transparent 3px);
+      background-size: 130px 160px,170px 190px,210px 220px;
+      animation: greenParticles 15s linear infinite;
+    }
+
+    @keyframes greenParticles {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .mowing .container {
+      position: relative;
+      z-index: 3;
+    }
+
+    .mowing-heading .section-label {
+      color: var(--green);
+    }
+
+    .mowing-heading h2 {
+      color: var(--green-deep);
+    }
+
+    .mowing-heading p {
+      color: #617665;
+    }
+
+    .mowing-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: var(--green-dark);
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(65,145,70,.16);
+      box-shadow: 0 8px 25px rgba(43,111,52,.07);
+      backdrop-filter: blur(12px);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .mowing-brand::before {
+      content: "🌱";
+    }
+
+    .mowing-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    /* Grass visual */
+
+    .mowing-visual {
+      position: relative;
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+    }
+
+    .mowing-glow {
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: rgba(82,176,88,.16);
+      filter: blur(38px);
+    }
+
+    .mowing-card {
+      position: relative;
+      z-index: 2;
+      width: min(390px,92%);
+      padding: 35px;
+      border-radius: 32px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.92);
+      box-shadow: 0 25px 65px rgba(43,111,52,.12);
+      backdrop-filter: blur(18px);
+      transform: rotate(-2deg);
+      transition: var(--transition);
+    }
+
+    .mowing-card:hover {
+      transform: rotate(0) translateY(-9px);
+    }
+
+    .mowing-main-icon {
+      width: 75px;
+      height: 75px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 23px;
+      border-radius: 21px;
+      background: linear-gradient(135deg,#5dbb62,#31833d);
+      color: white;
+      font-size: 36px;
+      box-shadow: 0 15px 35px rgba(49,131,61,.24);
+    }
+
+    .mowing-card h3 {
+      margin-bottom: 9px;
+      color: var(--green-deep);
+      font-size: 27px;
+      letter-spacing: -1px;
+    }
+
+    .mowing-card p {
+      color: #617665;
+      font-size: 14px;
+    }
+
+    /* Grass blades */
+
+    .grass {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      width: 280px;
+      height: 90px;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .blade {
+      position: absolute;
+      bottom: 0;
+      width: 8px;
+      height: var(--height);
+      border-radius: 100% 0 100% 0;
+      background: linear-gradient(
+        180deg,
+        #79c96f,
+        #31833d
+      );
+      transform-origin: bottom;
+      animation: grassSway 3s ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes grassSway {
+      0%,100% {
+        transform: rotate(-4deg);
+      }
+
+      50% {
+        transform: rotate(7deg);
+      }
+    }
+
+    .blade:nth-child(1) {
+      left: 8%;
+    }
+
+    .blade:nth-child(2) {
+      left: 18%;
+    }
+
+    .blade:nth-child(3) {
+      left: 28%;
+    }
+
+    .blade:nth-child(4) {
+      left: 38%;
+    }
+
+    .blade:nth-child(5) {
+      left: 48%;
+    }
+
+    .blade:nth-child(6) {
+      left: 58%;
+    }
+
+    .blade:nth-child(7) {
+      left: 68%;
+    }
+
+    .blade:nth-child(8) {
+      left: 78%;
+    }
+
+    .blade:nth-child(9) {
+      left: 88%;
+    }
+
+    /* Leaves */
+
+    .leaf {
+      position: absolute;
+      font-size: 28px;
+      animation: leafFloat var(--duration) ease-in-out infinite;
+      animation-delay: var(--delay);
+      opacity: .72;
+    }
+
+    @keyframes leafFloat {
+      0%,100% {
+        transform: translate(0,0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(18px,-25px) rotate(20deg);
+      }
+    }
+
+    .leaf-one {
+      top: 45px;
+      left: 5%;
+    }
+
+    .leaf-two {
+      top: 100px;
+      right: 8%;
+      font-size: 21px;
+    }
+
+    .leaf-three {
+      bottom: 65px;
+      left: 5%;
+      font-size: 20px;
+    }
+
+    /* Mowing content */
+
+    .mowing-content {
+      position: relative;
+    }
+
+    .mowing-content h3 {
+      margin-bottom: 15px;
+      color: var(--green-deep);
+      font-size: 31px;
+      letter-spacing: -1px;
+    }
+
+    .mowing-content > p {
+      margin-bottom: 27px;
+      color: #617665;
+      font-size: 16px;
+    }
+
+    .mowing-services {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 13px;
+      margin-bottom: 28px;
+      list-style: none;
+    }
+
+    .mowing-service {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 15px;
+      border-radius: 17px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(70,145,75,.12);
+      box-shadow: 0 10px 28px rgba(43,111,52,.05);
+      color: #284b30;
+      font-size: 13px;
+      font-weight: 750;
+      transition: var(--transition);
+    }
+
+    .mowing-service:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 15px 35px rgba(43,111,52,.1);
+    }
+
+    .mowing-service-icon {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #e4f4e4;
+      font-size: 18px;
+    }
+
+    .mowing-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .mowing-btn {
+      color: white;
+      background: linear-gradient(135deg,#4fa857,#2d7d39);
+      box-shadow: 0 12px 30px rgba(45,125,57,.2);
+    }
+
+    .mowing-btn:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(135deg,#5dbb62,#26743a);
+    }
+
+    .mowing-email {
+      color: var(--green-dark);
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(63,155,77,.2);
+    }
+
+    .mowing-email:hover {
+      color: var(--green-dark);
+      background: white;
+      transform: translateY(-4px);
+    }
+
+    .mowing-price {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 10px 15px;
+      border-radius: 999px;
+      color: var(--green-dark);
+      background: #e6f5e6;
+      border: 1px solid #d1ebd1;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      padding: 35px 0;
+      color: rgba(255,255,255,.68);
+      background: #021735;
+    }
+
+    .footer-inner {
+      width: min(1120px,calc(100% - 40px));
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      color: white;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .footer-brand span {
+      color: var(--yellow);
+    }
+
+    .footer-services {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.62);
+      font-size: 12px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       BACK TOP
+    ========================================================= */
+
+    .back-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 900;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 14px 30px rgba(8,124,247,.3);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: var(--transition);
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-top:hover {
+      transform: translateY(-5px);
+      background: var(--blue-dark);
+    }
+
+    /* =========================================================
+       REVEALS
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-left {
+      opacity: 0;
+      transform: translateX(-45px);
+      transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .slide-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide-right {
+      opacity: 0;
+      transform: translateX(45px);
+      transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .slide-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width:900px) {
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 25px;
+      }
+
+      .hero-copy {
+        margin: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .car-scene {
+        min-height: 390px;
+      }
+
+      .about-grid,
+      .contact-grid,
+      .mowing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-visual {
+        min-height: 360px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .cta-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .cta p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-buttons {
+        justify-content: center;
+      }
+
+      .mowing-visual {
+        min-height: 370px;
+      }
+    }
+
+    @media (max-width:720px) {
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 20px;
+        right: 20px;
+        display: grid;
+        gap: 4px;
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,.75);
+        border-radius: 20px;
+        background: rgba(255,255,255,.94);
+        box-shadow: 0 20px 45px rgba(4,60,125,.15);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition);
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 13px;
+      }
+
+      .menu-toggle {
+        display: grid;
+        place-items: center;
+      }
+
+      .hero h1 {
+        letter-spacing: -2.7px;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-grid {
+        padding-top: 135px;
+        padding-bottom: 110px;
+      }
+
+      .car-scene {
+        min-height: 320px;
+      }
+
+      .car-card {
+        width: 95%;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-card.featured {
+        transform: none;
+      }
+
+      .price-card.featured:hover {
+        transform: translateY(-10px);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-inner {
+        padding: 35px 24px;
+      }
+
+      .contact-info {
+        padding: 30px 25px;
+      }
+
+      .mowing-services {
+        grid-template-columns: 1fr;
+      }
+
+      .mowing-contact {
+        flex-direction: column;
+      }
+
+      .mowing-contact .btn {
+        width: 100%;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-services {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width:460px) {
+
+      .nav-container,
+      .container,
+      .hero-grid {
+        width: min(100% - 28px,1180px);
+      }
+
+      .brand-text {
+        font-size: 17px;
+      }
+
+      .brand-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .hero-buttons,
+      .contact-actions,
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .about-card {
+        padding: 25px;
+      }
+
+      .contact-map {
+        min-height: 330px;
+      }
+
+      .mowing-card {
+        padding: 27px;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       LOADER
+  ======================================================== -->
+
+  <div id="loader" aria-label="Loading Sparkle Wash">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <span aria-hidden="true">💦</span>
+      </div>
+
+      <div class="loader-name">
+        Sparkle Wash
+      </div>
+
+      <div class="loader-line"></div>
+    </div>
+  </div>
+
+  <div
+    class="scroll-progress"
+    id="scrollProgress"
+    aria-hidden="true"
+  ></div>
+
+  <!-- =======================================================
+       NAVIGATION
+  ======================================================== -->
+
+  <header class="navbar" id="navbar">
+
+    <nav
+      class="nav-container"
+      aria-label="Main navigation"
+    >
+
+      <a
+        href="#home"
+        class="brand"
+        aria-label="Sparkle Wash home"
+      >
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          ✦
+        </span>
+
+        <span class="brand-text">
+          Sparkle <span>Wash</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <ul
+        class="nav-links"
+        id="navLinks"
+      >
+
+        <li>
+          <a href="#home">Home</a>
+        </li>
+
+        <li>
+          <a href="#about">About</a>
+        </li>
+
+        <li>
+          <a href="#prices">Prices</a>
+        </li>
+
+        <li>
+          <a href="#why-us">Why Choose Us</a>
+        </li>
+
+        <!-- NEW -->
+        <li>
+          <a href="#mowing">Mowing</a>
+        </li>
+
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+
+        <li>
+          <a
+            class="nav-cta"
+            href="#contact"
+          >
+            Book Now
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <!-- =====================================================
+         SPARKLE WASH — HERO
+    ====================================================== -->
+
+    <section
+      class="hero"
+      id="home"
+    >
+
+      <span
+        class="bubble"
+        style="--size:25px;--duration:9s;--delay:0s;left:5%;"
+      ></span>
+
+      <span
+        class="bubble"
+        style="--size:15px;--duration:12s;--delay:2s;left:14%;"
+      ></span>
+
+      <span
+        class="bubble"
+        style="--size:40px;--duration:15s;--delay:4s;left:27%;"
+      ></span>
+
+      <span
+        class="bubble"
+        style="--size:19px;--duration:10s;--delay:1s;left:43%;"
+      ></span>
+
+      <span
+        class="bubble"
+        style="--size:30px;--duration:14s;--delay:6s;left:60%;"
+      ></span>
+
+      <span
+        class="bubble"
+        style="--size:14px;--duration:11s;--delay:3s;left:75%;"
+      ></span>
+
+      <span
+        class="bubble"
+        style="--size:34px;--duration:13s;--delay:5s;left:89%;"
+      ></span>
+
+      <div class="hero-grid">
+
+        <div class="hero-copy">
+
+          <div class="eyebrow">
+            Mobile car washing · Thame
+          </div>
+
+          <h1>
+            Professional
+            <span>Mobile</span>
+            Car Washing
+          </h1>
+
+          <p class="hero-subtitle">
+            We come to you and leave your vehicle sparkling clean.
+            Convenient car washing at your home or workplace in
+            Thame, Oxfordshire.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a
+              href="#contact"
+              class="btn btn-primary"
+            >
+              Book Now
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a
+              href="#contact"
+              class="btn btn-secondary"
+            >
+              Contact Us
+              <span aria-hidden="true">↗</span>
+            </a>
+
+          </div>
+
+        </div>
+
+        <div
+          class="car-scene"
+          aria-hidden="true"
+        >
+
+          <div class="car-glow"></div>
+
+          <div class="car-card">
+
+            <div class="car-topline">
+              <span>Mobile detailing</span>
+              <span class="sparkle">✦</span>
+            </div>
+
+            <svg
+              class="car-svg"
+              viewBox="0 0 700 360"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+
+              <defs>
+
+                <linearGradient
+                  id="bodyGradient"
+                  x1="80"
+                  y1="100"
+                  x2="620"
+                  y2="300"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#EAF7FF"/>
+                  <stop offset=".45" stop-color="#FFFFFF"/>
+                  <stop offset="1" stop-color="#9CD9FF"/>
+                </linearGradient>
+
+                <linearGradient
+                  id="glassGradient"
+                  x1="220"
+                  y1="100"
+                  x2="490"
+                  y2="180"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#BDEBFF"/>
+                  <stop offset="1" stop-color="#267ED3"/>
+                </linearGradient>
+
+                <linearGradient
+                  id="shineGradient"
+                  x1="150"
+                  y1="190"
+                  x2="590"
+                  y2="190"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FFFFFF" stop-opacity="0"/>
+                  <stop offset=".5" stop-color="#FFFFFF"/>
+                  <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+                </linearGradient>
+
+              </defs>
+
+              <ellipse
+                cx="350"
+                cy="300"
+                rx="260"
+                ry="30"
+                fill="#021735"
+                fill-opacity=".28"
+              />
+
+              <path
+                d="M106 235
+                   C119 204 148 181 190 172
+                   L244 111
+                   C260 92 283 82 310 82
+                   H427
+                   C451 82 474 94 491 111
+                   L548 172
+                   C588 179 615 198 628 232
+                   L638 261
+                   C643 278 630 292 612 292
+                   H101
+                   C83 292 72 277 78 260
+                   L89 238
+                   C92 231 98 231 106 235Z"
+                fill="url(#bodyGradient)"
+                stroke="#D5EEFF"
+                stroke-width="4"
+              />
+
+              <path
+                d="M259 113
+                   L220 167
+                   H334
+                   V101
+                   H291
+                   C278 101 267 105 259 113Z"
+                fill="url(#glassGradient)"
+                stroke="#8BCFFF"
+                stroke-width="3"
+              />
+
+              <path
+                d="M350 101
+                   V167
+                   H487
+                   L443 115
+                   C434 106 422 101 408 101
+                   H350Z"
+                fill="url(#glassGradient)"
+                stroke="#8BCFFF"
+                stroke-width="3"
+              />
+
+              <path
+                d="M343 103 V166"
+                stroke="#FFFFFF"
+                stroke-opacity=".7"
+                stroke-width="4"
+              />
+
+              <path
+                d="M105 226
+                   C206 212 500 211 621 230"
+                stroke="#6ABDF4"
+                stroke-width="5"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M132 222
+                   C245 188 484 187 590 217"
+                stroke="url(#shineGradient)"
+                stroke-width="8"
+                stroke-linecap="round"
+              />
+
+              <circle
+                cx="197"
+                cy="276"
+                r="48"
+                fill="#061A32"
+              />
+
+              <circle
+                cx="197"
+                cy="276"
+                r="28"
+                fill="#2B4965"
+              />
+
+              <circle
+                cx="197"
+                cy="276"
+                r="11"
+                fill="#B8D6EA"
+              />
+
+              <circle
+                cx="535"
+                cy="276"
+                r="48"
+                fill="#061A32"
+              />
+
+              <circle
+                cx="535"
+                cy="276"
+                r="28"
+                fill="#2B4965"
+              />
+
+              <circle
+                cx="535"
+                cy="276"
+                r="11"
+                fill="#B8D6EA"
+              />
+
+              <path
+                d="M583 213
+                   C602 216 616 223 624 236
+                   L588 238
+                   C581 232 579 223 583 213Z"
+                fill="#FFF2A6"
+              />
+
+              <path
+                d="M112 219
+                   C100 222 93 228 88 238
+                   H118
+                   C123 232 123 225 112 219Z"
+                fill="#FFD51F"
+              />
+
+              <path
+                d="M359 177 V224"
+                stroke="#7BBEE8"
+                stroke-width="3"
+              />
+
+              <path
+                d="M370 186 H397"
+                stroke="#5FA8D8"
+                stroke-width="4"
+                stroke-linecap="round"
+              />
+
+              <circle
+                cx="160"
+                cy="120"
+                r="8"
+                fill="#9BE6FF"
+              />
+
+              <circle
+                cx="185"
+                cy="97"
+                r="5"
+                fill="#FFFFFF"
+              />
+
+              <circle
+                cx="535"
+                cy="118"
+                r="7"
+                fill="#9BE6FF"
+              />
+
+              <circle
+                cx="570"
+                cy="91"
+                r="4"
+                fill="#FFFFFF"
+              />
+
+            </svg>
+
+            <div class="car-badge">
+
+              <div class="car-badge-icon">
+                ✓
+              </div>
+
+              <div>
+                <strong>We come to you</strong>
+                <small>Home or workplace service</small>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        class="wave"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 80 C180 140 300 15 500 60 C700 105 850 130 1200 35 V120 H0Z"
+            fill="#f7fbff"
+          />
+        </svg>
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         SPARKLE WASH — ABOUT
+    ====================================================== -->
+
+    <section
+      class="about"
+      id="about"
+    >
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="about-visual slide-left">
+
+            <div class="about-orb"></div>
+
+            <div class="about-card">
+
+              <div
+                class="about-icon"
+                aria-hidden="true"
+              >
+                🚗
+              </div>
+
+              <h3>
+                Your car.
+                Your location.
+              </h3>
+
+              <p>
+                No queues. No unnecessary trips.
+                We bring the wash to you.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="about-content slide-right">
+
+            <div class="section-label">
+              About Sparkle Wash
+            </div>
+
+            <h3>
+              A car wash that comes to you.
+            </h3>
+
+            <p>
+              Sparkle Wash is a friendly mobile car washing service
+              serving Thame, Oxfordshire. Instead of making you
+              travel to a car wash, we come directly to you.
+            </p>
+
+            <p>
+              Whether your vehicle is at home or at your workplace,
+              we bring what we need to get it looking clean and
+              refreshed.
+            </p>
+
+            <ul class="about-points">
+
+              <li>
+                <span class="check">✓</span>
+                Convenient service at your location
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Serving Thame, Oxfordshire
+              </li>
+
+              <li>
+                <span class="check">✓</span>
+                Simple, straightforward pricing
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         SPARKLE WASH — PRICES
+    ====================================================== -->
+
+    <section
+      class="prices"
+      id="prices"
+    >
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="section-label">
+            Simple pricing
+          </div>
+
+          <h2>
+            Clean car. Simple price.
+          </h2>
+
+          <p>
+            Straightforward pricing for our mobile car washing
+            service.
+          </p>
+
+        </div>
+
+        <div class="pricing-grid">
+
+          <article class="price-card reveal">
+
+            <div
+              class="price-icon"
+              aria-hidden="true"
+            >
+              🚗
+            </div>
+
+            <h3>Cars</h3>
+
+            <p>
+              Mobile wash for cars.
+            </p>
+
+            <div class="price">
+              £10
+            </div>
+
+            <a
+              href="#contact"
+              class="btn btn-primary"
+              aria-label="Book a car wash"
+            >
+              Book a Car Wash →
+            </a>
+
+          </article>
+
+          <article class="price-card featured reveal">
+
+            <div
+              class="price-icon"
+              aria-hidden="true"
+            >
+              🚐
+            </div>
+
+            <h3>Vans</h3>
+
+            <p>
+              Mobile wash for vans.
+            </p>
+
+            <div class="price">
+              £15
+            </div>
+
+            <a
+              href="#contact"
+              class="btn btn-primary"
+              aria-label="Book a van wash"
+            >
+              Book a Van Wash →
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         SPARKLE WASH — WHY US
+    ====================================================== -->
+
+    <section
+      class="why"
+      id="why-us"
+    >
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="section-label">
+            Why Sparkle Wash
+          </div>
+
+          <h2>
+            Fresh, convenient,
+            locally focused.
+          </h2>
+
+          <p>
+            Everything you need from a straightforward local
+            mobile car wash.
+          </p>
+
+        </div>
+
+        <div class="features-grid">
+
+          <article class="feature-card reveal">
+
+            <div
+              class="feature-icon"
+              aria-hidden="true"
+            >
+              🏠
+            </div>
+
+            <h3>
+              We Come To You
+            </h3>
+
+            <p>
+              Your vehicle can be washed at your home or workplace.
+            </p>
+
+          </article>
+
+          <article class="feature-card reveal">
+
+            <div
+              class="feature-icon"
+              aria-hidden="true"
+            >
+              ✨
+            </div>
+
+            <h3>
+              Professional Finish
+            </h3>
+
+            <p>
+              We focus on leaving your vehicle clean and looking its best.
+            </p>
+
+          </article>
+
+          <article class="feature-card reveal">
+
+            <div
+              class="feature-icon"
+              aria-hidden="true"
+            >
+              💷
+            </div>
+
+            <h3>
+              Affordable Prices
+            </h3>
+
+            <p>
+              Simple prices of £10 for cars and £15 for vans.
+            </p>
+
+          </article>
+
+          <article class="feature-card reveal">
+
+            <div
+              class="feature-icon"
+              aria-hidden="true"
+            >
+              😊
+            </div>
+
+            <h3>
+              Friendly Local Service
+            </h3>
+
+            <p>
+              A friendly mobile service based around Thame.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         SPARKLE WASH — CTA
+    ====================================================== -->
+
+    <section class="cta">
+
+      <div class="container">
+
+        <div class="cta-inner reveal">
+
+          <div>
+
+            <h2>
+              Ready to get your vehicle sparkling?
+            </h2>
+
+            <p>
+              We come to you in Thame, Oxfordshire.
+              Get in touch to arrange your mobile car wash.
+            </p>
+
+          </div>
+
+          <div class="cta-buttons">
+
+            <a
+              href="tel:07359166530"
+              class="btn btn-primary"
+              aria-label="Call Sparkle Wash"
+            >
+              📞 Call Now
+            </a>
+
+            <a
+              href="mailto:pro2670studios@gmail.com"
+              class="btn btn-secondary"
+              aria-label="Email Sparkle Wash"
+            >
+              ✉ Email Us
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         🌱 SPARKLE MOWING
+    ====================================================== -->
+
+    <section
+      class="mowing"
+      id="mowing"
+      aria-labelledby="mowing-title"
+    >
+
+      <div
+        class="mowing-transition"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Floating leaves -->
+      <div
+        class="leaf leaf-one"
+        style="--duration:4s;--delay:0s;"
+        aria-hidden="true"
+      >
+        🍃
+      </div>
+
+      <div
+        class="leaf leaf-two"
+        style="--duration:5s;--delay:1s;"
+        aria-hidden="true"
+      >
+        🌿
+      </div>
+
+      <div
+        class="leaf leaf-three"
+        style="--duration:4.5s;--delay:.5s;"
+        aria-hidden="true"
+      >
+        🍃
+      </div>
+
+      <div class="container">
+
+        <div class="section-heading mowing-heading reveal">
+
+          <div class="mowing-brand">
+            Sparkle Mowing
+          </div>
+
+          <div class="section-label">
+            A second Sparkle service
+          </div>
+
+          <h2 id="mowing-title">
+            Fresh lawns.
+            Right at your door. 🌱
+          </h2>
+
+          <p>
+            Sparkle Mowing is our mobile mowing service,
+            coming directly to customers in Thame, Oxfordshire.
+          </p>
+
+        </div>
+
+        <div class="mowing-grid">
+
+          <!-- Visual -->
+
+          <div class="mowing-visual slide-left">
+
+            <div class="mowing-glow"></div>
+
+            <div class="mowing-card">
+
+              <div
+                class="mowing-main-icon"
+                aria-hidden="true"
+              >
+                🌱
+              </div>
+
+              <h3>
+                Sparkle Mowing
+              </h3>
+
+              <p>
+                We come to you and help keep your lawn looking
+                fresh, tidy and well maintained.
+              </p>
+
+            </div>
+
+            <div
+              class="grass"
+              aria-hidden="true"
+            >
+
+              <span
+                class="blade"
+                style="--height:45px;--delay:0s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:65px;--delay:.2s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:52px;--delay:.4s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:72px;--delay:.1s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:58px;--delay:.5s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:68px;--delay:.3s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:48px;--delay:.7s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:63px;--delay:.2s;"
+              ></span>
+
+              <span
+                class="blade"
+                style="--height:55px;--delay:.6s;"
+              ></span>
+
+            </div>
+
+          </div>
+
+          <!-- Content -->
+
+          <div class="mowing-content slide-right">
+
+            <div class="mowing-brand">
+              Mobile lawn service
+            </div>
+
+            <h3>
+              We bring the mower to you.
+            </h3>
+
+            <p>
+              No need to take your garden anywhere — Sparkle Mowing
+              comes directly to your home in Thame, Oxfordshire.
+            </p>
+
+            <ul class="mowing-services">
+
+              <li class="mowing-service">
+
+                <span
+                  class="mowing-service-icon"
+                  aria-hidden="true"
+                >
+                  🌱
+                </span>
+
+                <span>
+                  Lawn mowing
+                </span>
+
+              </li>
+
+              <li class="mowing-service">
+
+                <span
+                  class="mowing-service-icon"
+                  aria-hidden="true"
+                >
+                  ✂️
+                </span>
+
+                <span>
+                  Grass edging
+                </span>
+
+              </li>
+
+              <li class="mowing-service">
+
+                <span
+                  class="mowing-service-icon"
+                  aria-hidden="true"
+                >
+                  🍃
+                </span>
+
+                <span>
+                  Garden tidy-up
+                </span>
+
+              </li>
+
+              <li class="mowing-service">
+
+                <span
+                  class="mowing-service-icon"
+                  aria-hidden="true"
+                >
+                  📍
+                </span>
+
+                <span>
+                  Thame, Oxfordshire
+                </span>
+
+              </li>
+
+            </ul>
+
+            <div class="mowing-price">
+              💷 Price on request
+            </div>
+
+            <div class="mowing-contact">
+
+              <a
+                href="tel:07359166530"
+                class="btn mowing-btn"
+                aria-label="Call Sparkle Mowing"
+              >
+                📞 Call 07359 166530
+              </a>
+
+              <a
+                href="mailto:pro2670studios@gmail.com"
+                class="btn mowing-email"
+                aria-label="Email Sparkle Mowing"
+              >
+                ✉ Email Us
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         SPARKLE WASH — CONTACT
+    ====================================================== -->
+
+    <section
+      class="contact"
+      id="contact"
+    >
+
+      <div class="container">
+
+        <div class="section-heading reveal">
+
+          <div class="section-label">
+            Contact
+          </div>
+
+          <h2>
+            Let's get your car sparkling.
+          </h2>
+
+          <p>
+            Contact Sparkle Wash to arrange your mobile car wash
+            in Thame, Oxfordshire.
+          </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+          <div class="contact-info slide-left">
+
+            <h3>
+              Get in touch
+            </h3>
+
+            <p>
+              Ready to book? Give us a call or send us an email.
+            </p>
+
+            <ul class="contact-list">
+
+              <li>
+
+                <div
+                  class="contact-icon"
+                  aria-hidden="true"
+                >
+                  📞
+                </div>
+
+                <div>
+                  <small>Phone</small>
+                  <strong>07359 166530</strong>
+                </div>
+
+              </li>
+
+              <li>
+
+                <div
+                  class="contact-icon"
+                  aria-hidden="true"
+                >
+                  ✉
+                </div>
+
+                <div>
+                  <small>Email</small>
+                  <strong>
+                    pro2670studios@gmail.com
+                  </strong>
+                </div>
+
+              </li>
+
+              <li>
+
+                <div
+                  class="contact-icon"
+                  aria-hidden="true"
+                >
+                  📍
+                </div>
+
+                <div>
+                  <small>Location</small>
+                  <strong>
+                    Thame, Oxfordshire
+                  </strong>
+                </div>
+
+              </li>
+
+            </ul>
+
+            <div class="contact-actions">
+
+              <a
+                href="tel:07359166530"
+                class="btn btn-primary"
+              >
+                📞 Call Sparkle Wash
+              </a>
+
+              <a
+                href="mailto:pro2670studios@gmail.com"
+                class="btn btn-secondary"
+              >
+                ✉ Send Email
+              </a>
+
+            </div>
+
+          </div>
+
+          <div
+            class="contact-map slide-right"
+            aria-label="Sparkle Wash service location: Thame, Oxfordshire"
+          >
+
+            <div class="map-circle"></div>
+
+            <div class="location-pin">
+
+              <div
+                class="pin-icon"
+                aria-hidden="true"
+              >
+                📍
+              </div>
+
+            </div>
+
+            <div class="map-label">
+              📍 Thame, Oxfordshire
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        Sparkle <span>Wash</span>
+      </div>
+
+      <div class="footer-services">
+        🚗 Sparkle Wash
+        <span>•</span>
+        🌱 Sparkle Mowing
+      </div>
+
+      <div class="footer-copy">
+        © 2026 Sparkle Wash · Serving Thame, Oxfordshire
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- BACK TO TOP -->
+
+  <button
+    class="back-top"
+    id="backTop"
+    type="button"
+    aria-label="Back to top"
+    title="Back to top"
+  >
+    ↑
+  </button>
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+    "use strict";
+
+    /* =======================================================
+       LOADER
+    ======================================================== */
+
+    window.addEventListener("load",() => {
+
+      const loader =
+        document.getElementById("loader");
+
+      setTimeout(() => {
+        loader.classList.add("hidden");
+      },500);
+
+    });
+
+
+    /* =======================================================
+       ELEMENTS
+    ======================================================== */
+
+    const navbar =
+      document.getElementById("navbar");
+
+    const backTop =
+      document.getElementById("backTop");
+
+    const progress =
+      document.getElementById("scrollProgress");
+
+    const menuToggle =
+      document.getElementById("menuToggle");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+
+    /* =======================================================
+       SCROLL
+    ======================================================== */
+
+    function handleScroll() {
+
+      const scrollTop =
+        window.scrollY ||
+        document.documentElement.scrollTop;
+
+      const documentHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+      const percentage =
+        documentHeight > 0
+          ? (scrollTop / documentHeight) * 100
+          : 0;
+
+      progress.style.width =
+        percentage + "%";
+
+
+      if (scrollTop > 40) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+
+
+      if (scrollTop > 500) {
+        backTop.classList.add("visible");
+      } else {
+        backTop.classList.remove("visible");
+      }
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      { passive:true }
+    );
+
+    handleScroll();
+
+
+    /* =======================================================
+       BACK TO TOP
+    ======================================================== */
+
+    backTop.addEventListener(
+      "click",
+      () => {
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+      }
+    );
+
+
+    /* =======================================================
+       MOBILE MENU
+    ======================================================== */
+
+    menuToggle.addEventListener(
+      "click",
+      () => {
+
+        const isOpen =
+          navLinks.classList.toggle("open");
+
+        menuToggle.setAttribute(
+          "aria-expanded",
+          String(isOpen)
+        );
+
+        menuToggle.setAttribute(
+          "aria-label",
+          isOpen
+            ? "Close navigation menu"
+            : "Open navigation menu"
+        );
+
+        menuToggle.textContent =
+          isOpen ? "✕" : "☰";
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".nav-links a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            navLinks.classList.remove("open");
+
+            menuToggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+            menuToggle.setAttribute(
+              "aria-label",
+              "Open navigation menu"
+            );
+
+            menuToggle.textContent = "☰";
+
+          }
+        );
+
+      });
+
+
+    /* =======================================================
+       SCROLL REVEALS
+    ======================================================== */
+
+    const revealElements =
+      document.querySelectorAll(
+        ".reveal,.slide-left,.slide-right"
+      );
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold:.12,
+          rootMargin:"0px 0px -45px 0px"
+        }
+      );
+
+    revealElements.forEach(element => {
+      observer.observe(element);
+    });
+
+
+    /* =======================================================
+       BUTTON RIPPLE
+    ======================================================== */
+
+    document
+      .querySelectorAll(".btn")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          function(event) {
+
+            const ripple =
+              document.createElement("span");
+
+            const rect =
+              this.getBoundingClientRect();
+
+            const size =
+              Math.max(
+                rect.width,
+                rect.height
+              );
+
+            ripple.style.position = "absolute";
+            ripple.style.width = size + "px";
+            ripple.style.height = size + "px";
+
+            ripple.style.left =
+              (
+                event.clientX -
+                rect.left -
+                size / 2
+              ) + "px";
+
+            ripple.style.top =
+              (
+                event.clientY -
+                rect.top -
+                size / 2
+              ) + "px";
+
+            ripple.style.borderRadius = "50%";
+            ripple.style.background =
+              "rgba(255,255,255,.28)";
+
+            ripple.style.transform =
+              "scale(0)";
+
+            ripple.style.pointerEvents =
+              "none";
+
+            ripple.style.animation =
+              "buttonRipple .65s ease-out";
+
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+              ripple.remove();
+            },700);
+
+          }
+        );
+
+      });
+
+
+    const rippleStyle =
+      document.createElement("style");
+
+    rippleStyle.textContent = `
+      @keyframes buttonRipple {
+        to {
+          transform:scale(2);
+          opacity:0;
+        }
+      }
+    `;
+
+    document.head.appendChild(
+      rippleStyle
+    );
+
+
+    /* =======================================================
+       HERO CAR PARALLAX
+       Existing Sparkle Wash effect
+    ======================================================== */
+
+    const carCard =
+      document.querySelector(".car-card");
+
+    if (
+      carCard &&
+      window.matchMedia(
+        "(hover:hover) and (pointer:fine)"
+      ).matches
+    ) {
+
+      document
+        .querySelector(".hero")
+        .addEventListener(
+          "mousemove",
+          event => {
+
+            const x =
+              (
+                event.clientX /
+                window.innerWidth -
+                .5
+              ) * 8;
+
+            const y =
+              (
+                event.clientY /
+                window.innerHeight -
+                .5
+              ) * 6;
+
+            carCard.style.transform =
+              `translate(${x}px,${y}px) rotate(2deg)`;
+
+          }
+        );
+
+      document
+        .querySelector(".hero")
+        .addEventListener(
+          "mouseleave",
+          () => {
+
+            carCard.style.transform =
+              "translate(0,0) rotate(2deg)";
+
+          }
+        );
+
+    }
+
+
+    /* =======================================================
+       ESCAPE MOBILE MENU
+    ======================================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape" &&
+          navLinks.classList.contains("open")
+        ) {
+
+          navLinks.classList.remove("open");
+
+          menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          menuToggle.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+          );
+
+          menuToggle.textContent = "☰";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
